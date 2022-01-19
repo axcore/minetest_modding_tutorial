@@ -1,0 +1,106 @@
+<!doctype html>
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<style type="text/css">
+td, th { border: 1px solid #c3c3c3; padding: 0 3px 0 3px; }
+table { border-collapse: collapse; }
+img { max-width: 100%; }
+</style>
+<meta name="generator" content="ReText 7.1.0">
+<title>ch08</title>
+<style type="text/css">
+</style>
+</head>
+<body>
+<p><a href="ch07.html">Previous</a> <a href="index.html">Index</a> <a href="ch09.html">Next</a></p>
+<hr>
+<h1>8 Decorations</h1>
+<p>Minetest randomly places trees, plants and other items throughout the game world. These are collectively called <strong>decorations</strong>.</p>
+<p>A decoration can consist of a single node, or several nodes. When we want to place several nodes together - a tree, or an igloo, or a cactus, for example - we use a <strong>schematic</strong>. You can think of a schematic as being some kind of blueprint.</p>
+<hr>
+<p>Placing single nodes is quite simple. We start with yet another new function.</p>
+<pre><code>    minetest.register_decoration(TABLE)
+</code></pre>
+<p>Let's create a decoration that randomly places brick blocks.</p>
+<p>Every decoration should have a <strong>name</strong>, a <strong>decoration</strong> and a <strong>deco_type</strong>.</p>
+<p>The <strong>decoration</strong> and <strong>deco_type</strong> are usually the same, namely the node to be placed. In this case, that is <strong>default:brick</strong>. When placing single nodes, the <strong>deco_type</strong> is always <strong>"simple"</strong>.</p>
+<pre><code>    minetest.register_decoration({
+        name = "default:brick",
+        decoration = "default:brick",
+        deco_type = "simple",
+    })
+</code></pre>
+<p>There is more than one way to specify <em>where</em> the node should be placed. A popular choice is to specify a list of biomes. We might use the <strong>grassland</strong> and <strong>desert</strong> biomes provided by <a href="https://content.minetest.net/packages/Minetest/minetest_game/">minetest-game</a>. (If you added code from the previous chapter that deletes biomes from other mods, then remove that code first!)</p>
+<pre><code>    biomes = {"grassland", "desert"},
+</code></pre>
+<p>Alternatively, you could tell Minetest to place the nodes in any biome, but on particular nodes.</p>
+<pre><code>    place_on = {"default:dirt_with_grass", "default:sand"},
+</code></pre>
+<p>if it's useful, you can specify a maximum and/or minimum height.</p>
+<pre><code>    y_max = 31000,
+    y_min = 1,
+</code></pre>
+<p>It's possible to use some or all of <strong>biomes</strong>, <strong>place_on</strong>, <strong>y_max</strong> and <strong>y_min</strong> in a single decoration. If you do, the node will only be placed in locations that satisfy all of those rules.</p>
+<hr>
+<p>You can customise the way in which Minetest places decorations.</p>
+<p>You don't need to think about how the following code works, you only need to know that it's for customising randomness. Just copy and paste this code into your decoration and then forget about it.</p>
+<pre><code>    sidelen = 16,
+    noise_params = {
+        offset = 0,
+        scale = 0.035,
+        spread = {x = 100, y = 100, z = 100},
+        seed = 329,
+        octaves = 3,
+        persist = 0.6
+    },
+</code></pre>
+<hr>
+<p>Putting this all together, we get the following code.</p>
+<pre><code>    minetest.register_decoration({
+        name = "default:brick",
+        decoration = "default:brick",
+        deco_type = "simple",
+        biomes = {"grassland", "desert"},
+        place_on = {"default:dirt_with_grass", "default:sand"},
+        sidelen = 16,
+        noise_params = {
+            offset = 0,
+            scale = 0.035,
+            spread = {x = 100, y = 100, z = 100},
+            seed = 329,
+            octaves = 3,
+            persist = 0.6
+        },
+        y_max = 31000,
+        y_min = 1,
+    })
+</code></pre>
+<p>Add this to your mod's <strong>init.lua</strong>, then start a new game. You should find lots of brick blocks lying all over the place.</p>
+<hr>
+<p>Creating a schematic is outside the scope of this tutorial. (If you want to try, there are several mods than can help you - try <a href="https://github.com/minetest-mods/saveschems">this one</a>, <a href="https://repo.or.cz/minetest_schemedit.git">this one</a>, <a href="https://gitlab.com/bztsrc/mtsedit">this one</a> or even <a href="https://content.minetest.net/packages/Josselin2/schemconvert/">this one</a>.)</p>
+<p>If you like, you could try placing an existing schematic - perhaps one provided by <a href="https://content.minetest.net/packages/Minetest/minetest_game/">minetest-game</a> - in a new environment. For example, we might try placing acacia trees in an icesheet biome. The top layer in that biome consists of <strong>default:snowblock</strong> nodes.</p>
+<p>Here is the code to do that.</p>
+<pre><code>    minetest.register_decoration({
+        name = "default:acacia_tree",
+        deco_type = "schematic",
+        schematic = minetest.get_modpath("default") .. "/schematics/acacia_tree.mts",
+        place_on = {"default:snowblock"},
+        sidelen = 16,
+        noise_params = {
+            offset = 0,
+            scale = 0.002,
+            spread = {x = 250, y = 250, z = 250},
+            seed = 2,
+            octaves = 3,
+            persist = 0.66
+        },
+    })
+</code></pre>
+<p>This code differs from the previous decoration in a couple of ways. Firstly, the <strong>deco_type</strong> is now <strong>"schematic"</strong>, instead of <strong>"simple"</strong>.</p>
+<p>Secondly, we use <strong>schematic</strong> instead of <strong>decoration</strong>, specifying the actual file from <a href="https://content.minetest.net/packages/Minetest/minetest_game/">minetest-game</a> that provides the schematic. (Since this is just a simple example, don't worry about how that line works.)</p>
+<hr>
+<p><a href="ch07.html">Previous</a> <a href="index.html">Index</a> <a href="ch09.html">Next</a></p>
+
+</body>
+</html>

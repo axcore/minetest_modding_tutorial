@@ -1,0 +1,43 @@
+<!doctype html>
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<style type="text/css">
+td, th { border: 1px solid #c3c3c3; padding: 0 3px 0 3px; }
+table { border-collapse: collapse; }
+img { max-width: 100%; }
+</style>
+<meta name="generator" content="ReText 7.1.0">
+<title>ch01</title>
+<style type="text/css">
+</style>
+</head>
+<body>
+<p><a href="index.html">Index</a> <a href="ch02.html">Next</a></p>
+<hr>
+<h1>1 Hello world!</h1>
+<p>Traditionally, programming tutorials start by teaching how to display a message like <strong>Hello world</strong>.</p>
+<p>Minetest is a graphical game, and text usually appears in a chat window. (On most systems, the chat window is visible when you press the <strong>T</strong> or <strong>F10</strong> keys on your keyboard).</p>
+<p>In this chapter we'll create a mod that writes a message in the Minetest chat window.</p>
+<hr>
+<p>Every mod should have a unique name. You could choose almost any name you like, but for now let's call it <strong>hello</strong>.</p>
+<p>On your computer's desktop, create a folder called <strong>hello</strong>. This folder will eventually contain everything the mod needs - code, graphics, sounds and documentation.</p>
+<p>The name of the mod (and its folder) should consist of letters, numbers and/or underlines (underscores). If you use any other kind of character, Minetest will refuse to start the mod.</p>
+<p>The first character of the name must not be a number.</p>
+<hr>
+<p>Minetest mods are written in a language called <a href="https://www.lua.org/">Lua</a>.</p>
+<p>When Minetest starts your mod, it looks for a file called <strong>init.lua</strong>. If the file doesn't exist, the mod will not start. So, the next step is to create a file called <strong>init.lua</strong>, inside your <strong>hello</strong> folder.</p>
+<p>Having created the file, open it in a text editor. For writing to the chat window, we need just a single line of Lua code.</p>
+<pre><code>    minetest.log("Hello world")
+</code></pre>
+<p>Don't worry about how it works; just make sure that you copy the line exactly. Save the file and close the text editor.</p>
+<hr>
+<p>Your first mod is now complete, so we can move the <strong>hello</strong> folder to the location in which Minetest stores its mods.</p>
+<p>Minetest looks for mods in several different places, depending both on the operating system you're using and the way in which you installed Minetest on your computer.</p>
+<p>After moving the <strong>hello</strong> folder to the right place, start Minetest and create a new game. Before starting the game, click the <strong>Select Mods</strong> button. You should be able to see a list of mods, hopefully including yours. Enable the <strong>hello</strong> mod, click the <strong>Save</strong> button, and start the game.</p>
+<p>If all has gone well, the game has started without an error, and you should be able to see <strong>Hello world!</strong> at the top of the screen.</p>
+<hr>
+<p><a href="index.html">Index</a> <a href="ch02.html">Next</a></p>
+
+</body>
+</html>

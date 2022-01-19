@@ -1,0 +1,150 @@
+[Previous](ch09.html) [Index](index.html)
+
+---
+
+#10 More Lua
+
+A good way to learn about writing Lua is to examine mods that other people have written, and try to work out what they do. For this, you'll need to learn some more Lua.
+
+Lua is one of the simpler languages to learn, and there are numerous free tutorials to be found on the internet.
+
+In case you're not ready to read a whole Lua tutorial yet, you should read this chapter, which introduces a few essential concepts in Lua programming: **comments**, **variables**, **operators**, **conditions**, **loops** and **namespaces**.
+
+##10.1 Comments
+
+Anything after two consecutive hyphens is ignored. This is called a **comment**.
+
+        -- Write anything you like here
+        -- because Minetest won't try to execute it
+
+Of course, this doesn't apply inside a string.
+
+        "Hello, world    -- This is not a comment"
+
+We can create a comment that spans several lines. This is useful if you want to prevent some code from being executed, temporarily.
+
+This type of comment starts with --[[, and finishes with ]].
+
+        --[[
+        minetest.log("Hello world!")
+        minetest.log("Goodbye cruel world!")
+        ]]
+
+Some authors like to use --[[ and ]]--, because it looks symmetrical.
+
+##10.2 Variables
+
+When we need to store a value in memory, we simply give it a name. This is called a **variable**.
+
+        phrase = "Hello world"
+
+Now, whenever we need to use that value, we can use the variable's name instead.
+
+        minetest.log(phrase)
+
+We can store numbers in variables, as well.
+
+        num = 100
+
+Be aware that if you want to display a number in the chat window, we have to convert it to a string first. We do this with a function called **tostring()**.
+
+        tostring(100)
+
+So, the complete line of code would be
+
+        minetest.log(tostring(num))
+
+##10.3 Operators
+
+We can use the plus and minus signs to do sums, and to store the result in a variable.
+
+        result = 2 + 3
+
+We use the * sign to do multiplication, and the / sign to do division.
+
+        result = 10 * 10
+        result = 50 / 2
+
+The +, -, * and / signs are collectively called **operators**. There are several more operators, besides those. One extremely useful operator is **..** which joins two strings together.
+
+        result = "hello" .. "world"
+        minetest.log(result)
+
+##10.4 Conditions
+
+A **condition** is something that is either true or false, for example **the shop is open**. At any given time, we can say that the shop is either open or closed.
+
+We use conditions to make decisions.
+
+        if the shop is open then go shopping
+
+Translating this into code, we get something like
+
+        IF the shop is open THEN go shopping END
+
+Because the decision-making code might span several lines, we always add END. Minetest needs to know where the decision-making code starts (at IF) and where it stops (at END).
+
+Here's a concrete example. We will create two variables, and then test whether they are the same, or not.
+
+        -- Both of these variables are set to 10
+        a = 2 * 5
+        b = 20 / 2
+
+In the condition, we use **==** to mean "the same as".
+
+        a == b
+
+This condition is true, because both **a** and **b** have been set to 10.
+
+So let's put the whole thing together.
+
+        a = 2 * 5
+        b = 20 / 2
+        c = 0
+        if a == b then c = 100
+
+In this example, the variable **c** is initially set to 0. It is then changed to 100, because the condition is true.
+
+Look carefully at this example. **=** is used to *set* a variable's value. **==** is used to *test* a variable's value. Don't get them confused!
+
+##10.5 Loops
+
+**Loops** are pieces of code that are executed several times in a row.
+
+There is more than one way to do a loop. Here is a simple way to do something ten times.
+
+        for 1, 10 do
+            minetest.log("Hello world")
+        end
+
+The first line specifies that this is a loop, ending at the third line.
+
+The loop is executed ten times. The first loop is #1, the last is #10. You can change the number of loops by changing either number.
+
+##10.6 Namespaces
+
+This line creates a variable.
+
+        num = 100
+
+Now, what happens if you have several mods that create a variable called **num**? Specifically, what if one of those mods wants to read not its own **num**, but the **num** from a different mod?
+
+The way this problem is solved is with **namespaces**. Longer explanations are available, but all you need to know is how to create them and how to use them.
+
+A namespace often has the same name as the mod itself. For your **hello** mod, you would create a namespace like this:
+
+        hello = {}
+
+Now you can create variables that *contain the name of the mod*.
+
+        hello.num = 100
+        hello.message = "Hello world"
+        hello.sum = 5 * 5
+
+Because the variable's name contains the name of the mod, it's easy for other mods to read the variable.
+
+        minetest.log(hello.message)
+
+---
+
+[Previous](ch09.html) [Index](index.html)

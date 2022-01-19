@@ -1,0 +1,47 @@
+[Index](index.html) [Next](ch02.html)
+
+---
+
+#1 Hello world!
+
+Traditionally, programming tutorials start by teaching how to display a message like **Hello world**.
+
+Minetest is a graphical game, and text usually appears in a chat window. (On most systems, the chat window is visible when you press the **T** or **F10** keys on your keyboard).
+
+In this chapter we'll create a mod that writes a message in the Minetest chat window.
+
+---
+
+Every mod should have a unique name. You could choose almost any name you like, but for now let's call it **hello**.
+
+On your computer's desktop, create a folder called **hello**. This folder will eventually contain everything the mod needs - code, graphics, sounds and documentation.
+
+The name of the mod (and its folder) should consist of letters, numbers and/or underlines (underscores). If you use any other kind of character, Minetest will refuse to start the mod.
+
+The first character of the name must not be a number.
+
+---
+
+Minetest mods are written in a language called [Lua](https://www.lua.org/).
+
+When Minetest starts your mod, it looks for a file called **init.lua**. If the file doesn't exist, the mod will not start. So, the next step is to create a file called **init.lua**, inside your **hello** folder.
+
+Having created the file, open it in a text editor. For writing to the chat window, we need just a single line of Lua code.
+
+        minetest.log("Hello world")
+
+Don't worry about how it works; just make sure that you copy the line exactly. Save the file and close the text editor.
+
+---
+
+Your first mod is now complete, so we can move the **hello** folder to the location in which Minetest stores its mods.
+
+Minetest looks for mods in several different places, depending both on the operating system you're using and the way in which you installed Minetest on your computer.
+
+After moving the **hello** folder to the right place, start Minetest and create a new game. Before starting the game, click the **Select Mods** button. You should be able to see a list of mods, hopefully including yours. Enable the **hello** mod, click the **Save** button, and start the game.
+
+If all has gone well, the game has started without an error, and you should be able to see **Hello world!** at the top of the screen.
+
+---
+
+[Index](index.html) [Next](ch02.html)

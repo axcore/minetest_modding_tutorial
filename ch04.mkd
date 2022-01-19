@@ -1,0 +1,189 @@
+[Previous](ch03.html) [Index](index.html) [Next](ch05.html)
+
+---
+
+#4 Craft recipes
+
+In Minetest, you collect items, then place those items on a **crafting grid** in order to create (or craft) new items.
+
+There are several mods that provide a crafing grid. These screenshots are from the one in [minetest-game](https://content.minetest.net/packages/Minetest/minetest_game/).
+
+![Door recipe](img/ch04/door_recipe.png)
+
+Here, we use six glass blocks to craft a door. The arrangement of glass blocks is the **craft recipe**.
+
+It's easy to create a new craft recipe. The happy block from the previous chapter can have a single craft recipe, or many different ones. We can even create new recipes for existing blocks, if we want to.
+
+---
+
+In previous chapters, we used a function which received two pieces of data.
+
+        minetest.register_node(NAME, TABLE)
+
+Now we'll use a new function which receives a single piece of data, a table.
+
+        minetest.register_craft(TABLE)
+
+Once again, we prefer to put the beginning and end of the table on separate lines.
+
+        minetest.register_craft({
+            STUFF
+            GOES
+            HERE
+        })
+
+---
+
+Now, the table contains two things, the **output** and the **recipe**.
+
+The output is the name of the happy block. It's a string.
+
+        output = "hello:happy_block",
+
+Let's say that happy blocks can be crafted from dirt, perhaps like this:
+
+![Example recipe](img/ch04/recipe1.png)
+
+This craft recipe comprises throws rows of dirt. We add each row to a list.
+
+        recipe = {
+            ROW,
+            ROW,
+            ROW,
+        },
+
+But every row is itself a list, containing three items.
+
+        recipe = {
+            { ITEM, ITEM, ITEM },
+            { ITEM, ITEM, ITEM },
+            { ITEM, ITEM, ITEM },
+        },
+
+The actual name of the dirt node, if you didn't know, is **default:dirt**. So let's insert that into our recipe.
+
+        recipe = {
+            { "default:dirt", "default:dirt", "default:dirt" },
+            { "default:dirt", "default:dirt", "default:dirt" },
+            { "default:dirt", "default:dirt", "default:dirt" },
+        },
+
+Putting it all together, we get this:
+
+        minetest.register_craft({
+            output = "hello:happy_block",
+            recipe = {
+                { "default:dirt", "default:dirt", "default:dirt" },
+                { "default:dirt", "default:dirt", "default:dirt" },
+                { "default:dirt", "default:dirt", "default:dirt" },
+            },
+        })
+
+Copy this code into your mod's **init.lua**, restart the game, and then open your inventory. You should now be able to craft the happy block from dirt.
+
+---
+
+Now let's try something different. Modify your code to replace one of the **default:dirt** items (it doesn't matter which) with an empty string.
+
+        recipe = {
+            { "default:dirt", "default:dirt", "default:dirt" },
+            { "default:dirt", "",             "default:dirt" },
+            { "default:dirt", "default:dirt", "default:dirt" },
+        },
+
+Restart the game, open your inventory again, and you should see something like this:
+
+![Example recipe](img/ch04/recipe2.png)
+
+The crafting recipe now expects an empty slot. If you try to put dirt there, or indeed any other item, the happy block will no longer be craftable.
+
+You can insert empty strings into any of the nine slots. Try making a craft recipe that looks like this!
+
+![Example recipe](img/ch04/recipe3.png)
+
+---
+
+Now, consider a craft recipe that uses just four dirts.
+
+![Example recipe](img/ch04/recipe4.png)
+
+In cases like this, instead of specifying a 3x3 grid:
+
+        recipe = {
+            { ITEM, ITEM, ITEM },
+            { ITEM, ITEM, ITEM },
+            { ITEM, ITEM, ITEM },
+        },
+
+...we should specify a 2x2 grid:
+
+        recipe = {
+            { ITEM, ITEM },
+            { ITEM, ITEM },
+        },
+
+In that way, the player doesn't have to remember which corner to use; any of the four corners will work.
+
+![Example recipe](img/ch04/recipe5.png)
+
+Modify your code to look like this, then restart the game, and check for yourself that the craft recipe works in all four corners.
+
+        recipe = {
+            { "default:dirt", "default:dirt" },
+            { "default:dirt", "default:dirt" },
+        },
+
+---
+
+We could take this even further, and create a craft recipe that uses just three dirts, all in a row.
+
+![Example recipe](img/ch04/recipe6.png)
+
+Change your code to this, and then check that the dirts can be placed on any one of the three rows.
+
+        recipe = {
+            { "default:dirt", "default:dirt", "default:dirt" },
+        },
+
+In fact, why not create a craft recipe with just a single dirt? This is actually quite a common arrangement; we can use it to convert a single dirt block into a single happy block. The dirt block can be placed in any of the nine slots.
+
+        recipe = {
+            { "default:dirt" },
+        },
+
+---
+
+There is a special type of craft recipe for use in furnaces. You should be familiar with placing an iron lump and some fuel into a furnace, in order to produce an iron ingot.
+
+![Cooking recipe](img/ch04/cooking_recipe.png)
+
+If we wanted to produce happy blocks by burning dirt, we can do that with a call to the same function.
+
+        minetest.register_craft()
+
+As before, we need both an **output** and a **recipe**, but this time, the recipe is a simple string, not a bunch of lists.
+
+        minetest.register_craft({
+            output = "hello:happy_block",
+            recipe = "default:dirt",
+        })
+
+We also have to add a **type**, which tells Minetest that this is a cooking recipe.
+
+        minetest.register_craft({
+            type = "cooking",
+            output = "hello:happy_block",
+            recipe = "default:dirt",
+        })
+
+You'll recall that items in a table can appear in any order. We normally use the order **type** - **output** - **recipe** because it's a little easier for humans to read.
+
+Copy that code into your **init.lua**, restart the game, and you should find that dirt can be cooked to produce happy blocks.
+
+![Cooking recipe](img/ch04/cooking_recipe2.png)
+
+Of course, this make no logical sense, but now you know how recipes work, you can create as many as you want, and make them as sensible or as crazy as you want.
+
+---
+
+[Previous](ch03.html) [Index](index.html) [Next](ch05.html)

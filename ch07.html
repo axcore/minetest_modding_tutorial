@@ -1,0 +1,109 @@
+<!doctype html>
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<style type="text/css">
+td, th { border: 1px solid #c3c3c3; padding: 0 3px 0 3px; }
+table { border-collapse: collapse; }
+img { max-width: 100%; }
+</style>
+<meta name="generator" content="ReText 7.1.0">
+<title>ch07</title>
+<style type="text/css">
+</style>
+</head>
+<body>
+<p><a href="ch06.html">Previous</a> <a href="index.html">Index</a> <a href="ch08.html">Next</a></p>
+<hr>
+<h1>7 Biomes</h1>
+<p><a href="https://content.minetest.net/packages/Minetest/minetest_game/">minetest-game</a> provides a number of biomes: hot deserts, lush rainforests, grasslands, beaches and so on.</p>
+<p>With just a little effort, we can create our own beautiful biomes. With slightly less effort, we can create some very silly biomes. So let's do the second one!</p>
+<p>This chapter applies only to biome-sensitive mapgens. If you're not sure what that means, then don't worry about it; just make sure that you world is not using the mapgen called <strong>v6</strong>. (The mapgens called <strong>v7</strong>, <strong>valleys</strong> and <strong>carpathian</strong> are all fine.)</p>
+<hr>
+<p>When testing new biomes, it's a good idea to tell Minetest to forget the biomes it already has. In that way, your new biome will stand out in the map.</p>
+<p>If you want to do that, copy and paste this code into your <strong>init.lua</strong> file, near the top, and don't worry too much about how it works.</p>
+<pre><code>    minetest.clear_registered_biomes()
+    minetest.register_alias("mapgen_stone", "default:stone")
+    minetest.register_alias("mapgen_water_source", "default:water_source")
+    minetest.register_alias("mapgen_river_water_source", "default:river_water_source")
+</code></pre>
+<hr>
+<p>To create a new biome, we use a function that receives a single piece of data:</p>
+<pre><code>    minetest.register_biome(TABLE)
+</code></pre>
+<p>We can start by giving the biome a unique <strong>name</strong>.</p>
+<pre><code>    minetest.register_biome({
+        name = "comfy",
+    })
+</code></pre>
+<p>Minetest creates a world in which different areas have different temperatures. The coldest temperature is 0, the hottest temperature is 100. An average temperature would be 50. (These numbers are not supposed to represent a Celcius/Centigrade/Fahrenheit scale.)</p>
+<p>The temperature is specified as a <strong>heat_point</strong>.</p>
+<pre><code>    minetest.register_biome({
+        name = "comfy",
+        heat_point = 50,
+    })
+</code></pre>
+<p>Different areas of the map also have different humidities. Humidity too is measured on a scale of 0 to 100. A desert might be hot (temperature 100), but have a very low humidity (0); whereas a tropical rainforest would also be hot, but have a very high humidity (100).</p>
+<p>The humidity is specified as a <strong>humidity_point</strong>.</p>
+<pre><code>    minetest.register_biome({
+        name = "comfy",
+        heat_point = 50,
+        humidity_point = 50,
+    })
+</code></pre>
+<hr>
+<p>The third scale is height.</p>
+<p>A Minetest world is approximately 64,000 blocks in each dimension. We can specify that a biome should appear between a maximum and minimum height.</p>
+<p>A beach biome might use a maximum height of 3 (approximately three blocks above sea level) and a minimum of -3 (approximately three blocks below see level); a mountain biome might use a minimum of 50 and a maximum of 200.</p>
+<p>The values are specified with <strong>y_max</strong> and <strong>y_min</strong>.</p>
+<pre><code>    minetest.register_biome({
+        name = "comfy",
+        y_max = 100,
+        y_min = -100,
+        heat_point = 50,
+        humidity_point = 50,
+    })
+</code></pre>
+<hr>
+<p>The biome specifies which blocks appear near the surface. In a desert you'd expect to find a thin layer of sand, followed by a thicker layer of sandstone. In a grassland, you'd expect to find a thin layer of grass, followed by a thicker layer of dirt.</p>
+<p>The top layer is specified like this:</p>
+<pre><code>    node_top = "default:desert_sand",
+    depth_top = 1,
+</code></pre>
+<p>In grassland, it would be specified like this:</p>
+<pre><code>    node_top = "default:dirt_with_grass",
+    depth_top = 1,
+</code></pre>
+<p>The layer just below is specified like this:</p>
+<pre><code>    node_filler = "default:desert_stone",
+    depth_filler = 3,
+</code></pre>
+<p>In grassland, it would be specified like this:</p>
+<pre><code>    node_filler = "default:dirt",
+    depth_filler = 3,
+</code></pre>
+<p>You can change the numbers to make each layer as thick or as thin as you like.</p>
+<p>If you want, you can specify a third layer beneath the upper two, which is normally some kind of stone. Ordinarily this would be Minetest's default stone, but perhaps you would like it to be something else:</p>
+<pre><code>    node_stone = "default:sandstone",
+</code></pre>
+<hr>
+<p>You can create as many biomes as you want, using different temperatures, heights and humidities for each.</p>
+<p>It is easy to create some very silly biomes. For example, this one creates a thin layer of glass above a thicker layer of happy blocks, all sitting on top of some kind of bedrock made of pure diamond. Go ahead and try it!</p>
+<pre><code>    minetest.register_biome({
+        name = "silly",
+        y_max = 100,
+        y_min = -100,
+        heat_point = 50,
+        humidity_point = 50,
+        node_top = "default:glass",
+        depth_top = 1,
+        node_filler = "hello:happy_block",
+        depth_filler = 3,
+        node_stone = "default:diamondblock",
+    })
+</code></pre>
+<hr>
+<p><a href="ch06.html">Previous</a> <a href="index.html">Index</a> <a href="ch08.html">Next</a></p>
+
+</body>
+</html>

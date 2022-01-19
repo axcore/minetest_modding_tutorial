@@ -1,0 +1,112 @@
+<!doctype html>
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<style type="text/css">
+td, th { border: 1px solid #c3c3c3; padding: 0 3px 0 3px; }
+table { border-collapse: collapse; }
+img { max-width: 100%; }
+</style>
+<meta name="generator" content="ReText 7.1.0">
+<title>ch06</title>
+<style type="text/css">
+</style>
+</head>
+<body>
+<p><a href="ch05.html">Previous</a> <a href="index.html">Index</a> <a href="ch07.html">Next</a></p>
+<hr>
+<h1>6 Tools</h1>
+<p>In Minetest, common tools include shovels, axes and pickaxes.</p>
+<p>You can create as many new tools as you like - you might create a pickaxe which is better than a diamond pickaxe, or you might create a shovel which is worse than a wooden shovel. The choice is yours!</p>
+<hr>
+<p>Once again, we start with a texture. Either create your own or use this one, which is supposed to resemble some kind of wooden club.</p>
+<p><img alt="Wooden club" src="img/ch06/wooden_club.png"></p>
+<p>The club is created with another new function. You can probably guess its name.</p>
+<pre><code>    minetest.register_tool(NAME, TABLE)
+</code></pre>
+<p>As usual, we start by adding the tool's name and splitting the code across several lines.</p>
+<pre><code>    minetest.register_tool("hello:wooden_club", {
+        STUFF
+        GOES
+        HERE
+    })
+</code></pre>
+<p>Just like a craftitem, a tool has a <strong>description</strong> and an <strong>inventory_image</strong>.</p>
+<pre><code>    minetest.register_tool("hello:wooden_club", {
+       description = "Wooden Club",
+       inventory_image = "wooden_club.png",
+    })
+</code></pre>
+<p>You should copy and paste this line, as well. It plays a sound effect when a worn-out tool finally breaks.</p>
+<pre><code>    sound = { breaks = "default_tool_breaks" },
+</code></pre>
+<hr>
+<p>Now, cast your mind back to the chapter in which we created the happy block. You might remember that we added the block to the <strong>cracky</strong> group, because we wanted it to behave like stone. Specifically, we wanted to force the player to use a pickaxe to dig it.</p>
+<pre><code>    groups = { cracky = 3 },
+</code></pre>
+<p>We might instead have added it to the <strong>choppy</strong> group or the <strong>crumbly</strong> group, for which the player would have needed an axe or a shovel.</p>
+<p>We can now put these groups to use, by specifying that our new tool can be used to "dig" blocks in the <strong>cracky</strong> group, or blocks in the <strong>choppy</strong> group, or blocks in the <strong>crumbly</strong> group.</p>
+<hr>
+<p>For simplicity, let's decide that our wooden club is some weird kind of pickaxe, such that it can dig items in the <strong>cracky</strong> group. (Our happy block is in the <strong>cracky</strong> group, so we can use it to dig that.)</p>
+<p>We need to add the following line to our function.</p>
+<pre><code>    tool_capabilities = TABLE,
+</code></pre>
+<p>The table contains four sets of numbers. Every time you create a new tool, you can just copy and paste this code block, and then adjust the numbers to suit your requirements.</p>
+<pre><code>    tool_capabilities = {
+        full_punch_interval = 0.9,
+        max_drop_level = 3,
+        groupcaps = {
+            cracky = { times = { [1] = 2.0, [2] = 1.0, [3] = 0.50 }, uses = 30, maxlevel = 3 },
+        },
+        damage_groups = { fleshy = 5 },
+    },
+</code></pre>
+<p>Normally you'll adjust only one or two values, leaving the rest alone, for example:</p>
+<pre><code>    uses = 30
+</code></pre>
+<p>This number specifies how many times the tool can be used, before wearing out. It doesn't correspond exactly to 30 stone blocks, but doubling the number <em>does</em> double the number of blocks you can dig.</p>
+<hr>
+<p>The happy block is in the <strong>cracky</strong> group:</p>
+<pre><code>    groups = { cracky = 3 },
+</code></pre>
+<p>You might remember that the <strong>3</strong> represents a soft node that is easy to dig, and that a <strong>2</strong> represents a harder node, whereas a <strong>1</strong> would represent a very hard node.</p>
+<p>Let's compare that with a part of the tool code:</p>
+<pre><code>    cracky = { times = { [1] = 2.0, [2] = 1.0, [3] = 0.50 }, uses = 30, maxlevel = 3 },
+</code></pre>
+<p>This line starts with <strong>cracky</strong>, so all of these numbers apply when digging a block in the <strong>cracky</strong> group.</p>
+<p>Now let's focus on a part of that line:</p>
+<pre><code>    [1] = 2.0, [2] = 1.0, [3] = 0.50
+</code></pre>
+<p>Roughly, this means that digging a <strong>cracky = 1</strong> node takes two seconds, digging a <strong>cracky = 2</strong> node takes one second, and digging a <strong>cracky = 3</strong> node takes half a second. You can adjust those numbers to suit your needs.</p>
+<hr>
+<p>We could amend that code so that the tool can't dig very hard nodes, just by missing out the first part.</p>
+<pre><code>    [2] = 1.0, [3] = 0.50
+</code></pre>
+<p>So the whole line would look like this:</p>
+<pre><code>    cracky = { times = { [2] = 1.0, [3] = 0.50 }, uses = 30, maxlevel = 3 },
+</code></pre>
+<p>We could amend it further, so that the tool can only dig soft nodes.</p>
+<pre><code>    [3] = 0.50
+</code></pre>
+<p>So the whole line would look like this:</p>
+<pre><code>    cracky = { times = { [3] = 0.50 }, uses = 30, maxlevel = 3 },
+</code></pre>
+<hr>
+<p>You might want a tool that can act like a pickaxe, an axe <em>or</em> a shovel.</p>
+<pre><code>    tool_capabilities = {
+        full_punch_interval = 0.9,
+        max_drop_level = 3,
+        groupcaps = {
+            cracky = { times = { [1] = 2.0, [2] = 1.0, [3] = 0.50 }, uses = 30, maxlevel = 3 },
+            choppy = { times = { [1] = 2.10, [2] = 0.90, [3] = 0.50 }, uses = 30, maxlevel = 3 },
+            crumbly = { times = { [1] = 1.10, [2] = 0.50, [3] = 0.30 }, uses = 30, maxlevel = 3 },
+        },
+        damage_groups = { fleshy = 5 },
+    },
+</code></pre>
+<p>If you don't want the tool to act like a pickaxe, just remove the <strong>cracky</strong> line. If you don't want it to act like an axe, remove the <strong>choppy</strong> line. If you don't want it to act like a shovel, remove the <strong>crumbly</strong> line.</p>
+<hr>
+<p><a href="ch05.html">Previous</a> <a href="index.html">Index</a> <a href="ch07.html">Next</a></p>
+
+</body>
+</html>

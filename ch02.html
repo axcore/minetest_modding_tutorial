@@ -1,0 +1,61 @@
+<!doctype html>
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<style type="text/css">
+td, th { border: 1px solid #c3c3c3; padding: 0 3px 0 3px; }
+table { border-collapse: collapse; }
+img { max-width: 100%; }
+</style>
+<meta name="generator" content="ReText 7.1.0">
+<title>ch02</title>
+<style type="text/css">
+</style>
+</head>
+<body>
+<p><a href="ch01.html">Previous</a> <a href="index.html">Index</a> <a href="ch03.html">Next</a></p>
+<hr>
+<h1>2 Creating a node</h1>
+<p>In Minetest you can dig dirt, stone, sand, tree trunks and so on. These blocks are called <strong>nodes</strong>.</p>
+<p>Creating new nodes is pretty simple, so let's create one now! The steps are:</p>
+<ol>
+<li>Create an image</li>
+<li>Choose a sound effect</li>
+<li>Write some code</li>
+</ol>
+<hr>
+<p>Here's an image you could use.</p>
+<p><img alt="Node image" src="img/ch02/happy.png"></p>
+<p>If you're reading this in a web browser, you can probably right-click the image and select <strong>Save image as...</strong>, or something similar to that.</p>
+<p>Alternatively, you could borrow an image from <a href="https://content.minetest.net/">another mod</a>, or create your own image in a graphics application.</p>
+<p>Images are normally 16 pixels (dots) high and 16 pixels wide. Some mods might use larger images, perhaps 32x32, 64x64 or even larger, but too many large images may make the game run slowly.</p>
+<p>Inside your <strong>hello</strong> folder, create another folder called <strong>textures</strong>. All of your images will be placed inside this folder (so don't choose a different name).</p>
+<hr>
+<p>It's possible to create a different sound effect for every new node, but most of the time we'll just re-use the sound effects provided by <a href="https://content.minetest.net/packages/Minetest/minetest_game/">minetest-game</a>.</p>
+<p>minetest-game is a collection of mods. One of those mods, called <strong>default</strong>, contains lots of sound effects.</p>
+<p>We need to tell Minetest to start <strong>default</strong> before it starts your mod, otherwise <strong>default</strong>'s sound effects won't be available to your mod.</p>
+<p>To do this, create a new file inside your <strong>hello</strong> folder called <strong>mod.conf</strong>. Open it in a text editor, copy-and-paste this text into it, and then save your changes.</p>
+<pre><code>    name = hello
+    description = My first mod
+    depends = default
+</code></pre>
+<p>These lines should be easy to understand. The first line provides the name of the mod. The mod and its folder should usually have the same name.</p>
+<p>The second line is optional, but recommended. You can replace <strong>My first mod</strong> with any text you like.</p>
+<p>The third line is the one that tells Minetest to start <strong>default</strong> before it starts your mod. </p>
+<hr>
+<p>Finally, open your <strong>init.lua</strong> file, and copy and paste this code into it. We'll talk about how it works in the next chapter.</p>
+<pre><code>    minetest.register_node("hello:happy_block", {
+        description = "A Very Happy Block",
+        tiles = {"happy.png"},
+        groups = {cracky = 3},
+        sounds = default.node_sound_stone_defaults(),
+    })
+</code></pre>
+<p>Start a game in creative mode. The new node should be visible in your inventory,</p>
+<p><img alt="Node image" src="img/ch02/happy_placed.png"></p>
+<p>If you can place the node in the game world, and then dig it up again, you're ready to move on to the next chapter!</p>
+<hr>
+<p><a href="ch01.html">Previous</a> <a href="index.html">Index</a> <a href="ch03.html">Next</a></p>
+
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!doctype html>
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<style type="text/css">
+td, th { border: 1px solid #c3c3c3; padding: 0 3px 0 3px; }
+table { border-collapse: collapse; }
+img { max-width: 100%; }
+</style>
+<meta name="generator" content="ReText 7.1.0">
+<title>ch09</title>
+<style type="text/css">
+</style>
+</head>
+<body>
+<p><a href="ch08.html">Previous</a> <a href="index.html">Index</a> <a href="ch10.html">Next</a></p>
+<hr>
+<h1>9 Ores</h1>
+<p>When you go mining underground, you'll find coal, iron and other metals dotted randomly around. These are collectively called <strong>ores</strong>.</p>
+<p>You can create your own ore distributions. Ores aren't limited to coal and metals. There is nothing stopping you from placing glass, wood or brick blocks throughout the underground world, if that's what you want.</p>
+<p>Minetest provides several types of ore distribution, intended to mimic the way ores are found in the real world. The types are called <strong>scatter</strong>, <strong>sheet</strong>, <strong>puff</strong>, <strong>blob</strong>, <strong>vein</strong> and <strong>stratum</strong>.</p>
+<p>The code is slightly different for each, so in this chapter we'll use the <strong>scatter</strong> type only. If you want to have a go at creating the others, you can copy and then modify code from <a href="https://content.minetest.net/">other mods</a>.</p>
+<hr>
+<p>An ore distribution is created with yet another new function.</p>
+<pre><code>    minetest.register_ore(TABLE)
+</code></pre>
+<p>Here is a complete code example, ready to be added to your mod's <strong>init.lua</strong>. Most of it should be self-explanatory.</p>
+<pre><code>    minetest.register_ore({
+        ore_type       = "scatter",
+        ore            = "default:brick",
+        wherein        = "default:stone",
+        clust_scarcity = 8 * 8 * 8,
+        clust_num_ores = 9,
+        clust_size     = 3,
+        y_max          = -100,
+        y_min          = -31000,
+    })
+</code></pre>
+<p>The <strong>ore</strong> is the node to be placed randomly. You can change this to any node you like, for example <strong>"hello:happy_block"</strong>.</p>
+<p>The <strong>ore_type</strong> called <strong>scatter</strong> will place several nodes of the same type together in a cluster. After finding one cluster, the player will have to do some digging around before they're able to find the next cluster.</p>
+<p>Most of the material underground is <strong>default:stone</strong>. The <strong>wherein</strong> line places the ore in this material. You could change it to something else, if you like.</p>
+<p><strong>clust_scarcity</strong> is usually written as three numbers, representing a cube. The * sign means "multiplied by" (in programming languages, we use * for multiplication, rather than x). We could also have written</p>
+<pre><code>    clust_scarcity = 512,
+</code></pre>
+<p>In short, this means that whenever Minetest generates a stone node underground, there is a 1 in 512 chance that an ore cluster will be placed there instead. (Another way to think about this is that, on average, one cluster will be found in any 8x8x8 cube.)</p>
+<p><strong>clust_size</strong> means that the cluster will be a 3x3x3 cube comprising a total of 27 nodes. <strong>cluster_num_ores</strong> specifies that 9 of those nodes will be the ore; the rest will be the original stone.</p>
+<p><strong>y_max</strong> and <strong>y_min</strong> are optional, but most people use them. In this case, the ore clusters don't appear until the player reaches approximately 100 blocks below sea level.</p>
+<hr>
+<p><a href="ch08.html">Previous</a> <a href="index.html">Index</a> <a href="ch10.html">Next</a></p>
+
+</body>
+</html>

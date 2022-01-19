@@ -1,0 +1,52 @@
+[Previous](ch08.html) [Index](index.html) [Next](ch10.html)
+
+---
+
+#9 Ores
+
+When you go mining underground, you'll find coal, iron and other metals dotted randomly around. These are collectively called **ores**.
+
+You can create your own ore distributions. Ores aren't limited to coal and metals. There is nothing stopping you from placing glass, wood or brick blocks throughout the underground world, if that's what you want.
+
+Minetest provides several types of ore distribution, intended to mimic the way ores are found in the real world. The types are called **scatter**, **sheet**, **puff**, **blob**, **vein** and **stratum**.
+
+The code is slightly different for each, so in this chapter we'll use the **scatter** type only. If you want to have a go at creating the others, you can copy and then modify code from [other mods](https://content.minetest.net/).
+
+---
+
+An ore distribution is created with yet another new function.
+
+        minetest.register_ore(TABLE)
+
+Here is a complete code example, ready to be added to your mod's **init.lua**. Most of it should be self-explanatory.
+
+        minetest.register_ore({
+            ore_type       = "scatter",
+            ore            = "default:brick",
+            wherein        = "default:stone",
+            clust_scarcity = 8 * 8 * 8,
+            clust_num_ores = 9,
+            clust_size     = 3,
+            y_max          = -100,
+            y_min          = -31000,
+        })
+
+The **ore** is the node to be placed randomly. You can change this to any node you like, for example **"hello:happy_block"**.
+
+The **ore_type** called **scatter** will place several nodes of the same type together in a cluster. After finding one cluster, the player will have to do some digging around before they're able to find the next cluster.
+
+Most of the material underground is **default:stone**. The **wherein** line places the ore in this material. You could change it to something else, if you like.
+
+**clust_scarcity** is usually written as three numbers, representing a cube. The * sign means "multiplied by" (in programming languages, we use * for multiplication, rather than x). We could also have written
+
+        clust_scarcity = 512,
+
+In short, this means that whenever Minetest generates a stone node underground, there is a 1 in 512 chance that an ore cluster will be placed there instead. (Another way to think about this is that, on average, one cluster will be found in any 8x8x8 cube.)
+
+**clust_size** means that the cluster will be a 3x3x3 cube comprising a total of 27 nodes. **cluster_num_ores** specifies that 9 of those nodes will be the ore; the rest will be the original stone.
+
+**y_max** and **y_min** are optional, but most people use them. In this case, the ore clusters don't appear until the player reaches approximately 100 blocks below sea level.
+
+---
+
+[Previous](ch08.html) [Index](index.html) [Next](ch10.html)
