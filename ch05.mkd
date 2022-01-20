@@ -61,7 +61,7 @@ Here is the complete code, which you can add to your **init.lua**.
             on_use = minetest.item_eat(2),
         })
 
-Whenever you want to create something edible, just copy and paste the **on_use** line. If you like, you can change the number. In [minetest-game](https://content.minetest.net/packages/Minetest/minetest_game/), the value 2 increases the player's health by one heart. The value 4 would increase it by 2 hearts.  
+Whenever you want to create something edible, just copy and paste the **on_use** line. If you like, you can change the number. In [minetest_game](https://content.minetest.net/packages/Minetest/minetest_game/), the value 2 increases the player's health by one heart. The value 4 would increase it by 2 hearts.  
 
 Since this is a chocolate bar, and not something healthy, you might try using a negative number. Modify the code to use the value **-2** and see what happens!
 

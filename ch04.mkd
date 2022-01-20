@@ -6,7 +6,7 @@
 
 In Minetest, you collect items, then place those items on a **crafting grid** in order to create (or craft) new items.
 
-There are several mods that provide a crafing grid. These screenshots are from the one in [minetest-game](https://content.minetest.net/packages/Minetest/minetest_game/).
+There are several mods that provide a crafing grid. These screenshots are from the one in [minetest_game](https://content.minetest.net/packages/Minetest/minetest_game/).
 
 ![Door recipe](img/ch04/door_recipe.png)
 

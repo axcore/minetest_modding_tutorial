@@ -36,9 +36,9 @@ Inside your **hello** folder, create another folder called **textures**. All of 
 
 ---
 
-It's possible to create a different sound effect for every new node, but most of the time we'll just re-use the sound effects provided by [minetest-game](https://content.minetest.net/packages/Minetest/minetest_game/).
+It's possible to create a different sound effect for every new node, but most of the time we'll just re-use the sound effects provided by [minetest_game](https://content.minetest.net/packages/Minetest/minetest_game/).
 
-minetest-game is a collection of mods. One of those mods, called **default**, contains lots of sound effects.
+minetest_game is a collection of mods. One of those mods, called **default**, contains lots of sound effects.
 
 We need to tell Minetest to start **default** before it starts your mod, otherwise **default**'s sound effects won't be available to your mod.
 

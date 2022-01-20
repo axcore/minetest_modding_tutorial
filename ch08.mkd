@@ -26,7 +26,7 @@ The **decoration** and **deco_type** are usually the same, namely the node to be
             deco_type = "simple",
         })
 
-There is more than one way to specify *where* the node should be placed. A popular choice is to specify a list of biomes. We might use the **grassland** and **desert** biomes provided by [minetest-game](https://content.minetest.net/packages/Minetest/minetest_game/). (If you added code from the previous chapter that deletes biomes from other mods, then remove that code first!)
+There is more than one way to specify *where* the node should be placed. A popular choice is to specify a list of biomes. We might use the **grassland** and **desert** biomes provided by [minetest_game](https://content.minetest.net/packages/Minetest/minetest_game/). (If you added code from the previous chapter that deletes biomes from other mods, then remove that code first!)
 
         biomes = {"grassland", "desert"},
 
@@ -86,7 +86,7 @@ Add this to your mod's **init.lua**, then start a new game. You should find lots
 
 Creating a schematic is outside the scope of this tutorial. (If you want to try, there are several mods than can help you - try [this one](https://github.com/minetest-mods/saveschems), [this one](https://repo.or.cz/minetest_schemedit.git), [this one](https://gitlab.com/bztsrc/mtsedit) or even [this one](https://content.minetest.net/packages/Josselin2/schemconvert/).)
 
-If you like, you could try placing an existing schematic - perhaps one provided by [minetest-game](https://content.minetest.net/packages/Minetest/minetest_game/) - in a new environment. For example, we might try placing acacia trees in an icesheet biome. The top layer in that biome consists of **default:snowblock** nodes.
+If you like, you could try placing an existing schematic - perhaps one provided by [minetest_game](https://content.minetest.net/packages/Minetest/minetest_game/) - in a new environment. For example, we might try placing acacia trees in an icesheet biome. The top layer in that biome consists of **default:snowblock** nodes.
 
 Here is the code to do that.
 
@@ -108,7 +108,7 @@ Here is the code to do that.
 
 This code differs from the previous decoration in a couple of ways. Firstly, the **deco_type** is now **"schematic"**, instead of **"simple"**.
 
-Secondly, we use **schematic** instead of **decoration**, specifying the actual file from [minetest-game](https://content.minetest.net/packages/Minetest/minetest_game/) that provides the schematic. (Since this is just a simple example, don't worry about how that line works.)
+Secondly, we use **schematic** instead of **decoration**, specifying the actual file from [minetest_game](https://content.minetest.net/packages/Minetest/minetest_game/) that provides the schematic. (Since this is just a simple example, don't worry about how that line works.)
 
 ---
 

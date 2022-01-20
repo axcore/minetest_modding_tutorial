@@ -4,7 +4,7 @@
 
 #7 Biomes
 
-[minetest-game](https://content.minetest.net/packages/Minetest/minetest_game/) provides a number of biomes: hot deserts, lush rainforests, grasslands, beaches and so on.
+[minetest_game](https://content.minetest.net/packages/Minetest/minetest_game/) provides a number of biomes: hot deserts, lush rainforests, grasslands, beaches and so on.
 
 With just a little effort, we can create our own beautiful biomes. With slightly less effort, we can create some very silly biomes. So let's do the second one!
 

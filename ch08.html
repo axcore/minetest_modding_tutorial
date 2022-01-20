@@ -31,7 +31,7 @@ img { max-width: 100%; }
         deco_type = "simple",
     })
 </code></pre>
-<p>There is more than one way to specify <em>where</em> the node should be placed. A popular choice is to specify a list of biomes. We might use the <strong>grassland</strong> and <strong>desert</strong> biomes provided by <a href="https://content.minetest.net/packages/Minetest/minetest_game/">minetest-game</a>. (If you added code from the previous chapter that deletes biomes from other mods, then remove that code first!)</p>
+<p>There is more than one way to specify <em>where</em> the node should be placed. A popular choice is to specify a list of biomes. We might use the <strong>grassland</strong> and <strong>desert</strong> biomes provided by <a href="https://content.minetest.net/packages/Minetest/minetest_game/">minetest_game</a>. (If you added code from the previous chapter that deletes biomes from other mods, then remove that code first!)</p>
 <pre><code>    biomes = {"grassland", "desert"},
 </code></pre>
 <p>Alternatively, you could tell Minetest to place the nodes in any biome, but on particular nodes.</p>
@@ -79,7 +79,7 @@ img { max-width: 100%; }
 <p>Add this to your mod's <strong>init.lua</strong>, then start a new game. You should find lots of brick blocks lying all over the place.</p>
 <hr>
 <p>Creating a schematic is outside the scope of this tutorial. (If you want to try, there are several mods than can help you - try <a href="https://github.com/minetest-mods/saveschems">this one</a>, <a href="https://repo.or.cz/minetest_schemedit.git">this one</a>, <a href="https://gitlab.com/bztsrc/mtsedit">this one</a> or even <a href="https://content.minetest.net/packages/Josselin2/schemconvert/">this one</a>.)</p>
-<p>If you like, you could try placing an existing schematic - perhaps one provided by <a href="https://content.minetest.net/packages/Minetest/minetest_game/">minetest-game</a> - in a new environment. For example, we might try placing acacia trees in an icesheet biome. The top layer in that biome consists of <strong>default:snowblock</strong> nodes.</p>
+<p>If you like, you could try placing an existing schematic - perhaps one provided by <a href="https://content.minetest.net/packages/Minetest/minetest_game/">minetest_game</a> - in a new environment. For example, we might try placing acacia trees in an icesheet biome. The top layer in that biome consists of <strong>default:snowblock</strong> nodes.</p>
 <p>Here is the code to do that.</p>
 <pre><code>    minetest.register_decoration({
         name = "default:acacia_tree",
@@ -98,7 +98,7 @@ img { max-width: 100%; }
     })
 </code></pre>
 <p>This code differs from the previous decoration in a couple of ways. Firstly, the <strong>deco_type</strong> is now <strong>"schematic"</strong>, instead of <strong>"simple"</strong>.</p>
-<p>Secondly, we use <strong>schematic</strong> instead of <strong>decoration</strong>, specifying the actual file from <a href="https://content.minetest.net/packages/Minetest/minetest_game/">minetest-game</a> that provides the schematic. (Since this is just a simple example, don't worry about how that line works.)</p>
+<p>Secondly, we use <strong>schematic</strong> instead of <strong>decoration</strong>, specifying the actual file from <a href="https://content.minetest.net/packages/Minetest/minetest_game/">minetest_game</a> that provides the schematic. (Since this is just a simple example, don't worry about how that line works.)</p>
 <hr>
 <p><a href="ch07.html">Previous</a> <a href="index.html">Index</a> <a href="ch09.html">Next</a></p>
 
