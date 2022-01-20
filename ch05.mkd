@@ -4,13 +4,13 @@
 
 #5 Craftitems
 
-Craftitems are things you can hold but not place on the ground. You have probably picked apples from a tree, and picked blueberries from a bush. Apples and blueberries are both craftitems.
+We can think of a craftitems as something that can be held, but not placed on the ground (at least, not without some special code). You have probably picked apples from a tree, and picked blueberries from a bush. Apples and blueberries are both craftitems.
 
 ---
 
 Creating new craftitems is simple. Let's create a chocolate bar that you can eat. As before, create your own image, or use this one:
 
-![Chocolate bar](img/ch05/chocolate.png)
+![Chocolate bar](img/ch05/hello_chocolate.png)
 
 This image contains transparent pixels, so that the chocolate bar has the right shape. If you're not sure how that is done in your graphics application, either search for help, or just use a normal square image.
 
@@ -34,34 +34,36 @@ For craftitems, the table almost always contains a **description** and an **inve
 
         minetest.register_craftitem("hello:chocolate", {
             description = "Delicious Chocolate Bar",
-            inventory_image = "chocolate.png",
+            inventory_image = "hello_chocolate.png",
         })
 
 ---
 
-Now, let's talk about **signals**.
+Now, let's talk about **callbacks**.
 
-Much of your Lua code sits around, doing nothing, until it's actually needed. When you hold the chocolate bar and left-click, Minetest sends a **signal** to the mod's code. The code can ignore the signal, or it can do something in response.
+Much of your Lua code sits around, doing nothing, until it's actually needed. In this case, the chocolate sits in your inventory, doing nothing, until you try to eat it.
 
-In this case, when the signal is received, we want to eat the chocolate bar. Eating something normally reduces the player's hunger, and might also improve their health.
+In most cases, eating something should improve the player's health, so we need a function that takes care of that.
 
-To do that, we add a new line to the table, in the following format:
+Having written the function, we ask Minetest to "call us back" whenever the player tries to **use** the chocolate. When the callback is received, the function is executed.
+
+This type of **callback** is in the following format:
 
         on_use = FUNCTION,
 
-When the code receives the signal, it checks to see whether **on_use** exists in the table. If so, the function is called (and something happens). If not, nothing happens.
+Whenever our code receives the callback, it checks to see whether **on_use** exists in the table. If so, the function is called (and something happens). If not, nothing happens.
 
 Here is the complete code, which you can add to your **init.lua**.
 
         minetest.register_craftitem("hello:chocolate", {
             description = "Delicious Chocolate Bar",
-            inventory_image = "chocolate.png",
+            inventory_image = "hello_chocolate.png",
             on_use = minetest.item_eat(2),
         })
 
-Whenever you want to create something edible, just copy and paste the **on_use** line. If you like, you can change the number: 1 will have very little effect on your player's hunger, but 5 would have a dramatic effect.
+Whenever you want to create something edible, just copy and paste the **on_use** line. If you like, you can change the number. In [minetest-game](https://content.minetest.net/packages/Minetest/minetest_game/), the value 2 increases the player's health by one heart. The value 4 would increase it by 2 hearts.  
 
-Since this is a chocolate bar, and not something healthy, you might try using a negative number. Modify the code and see what happens!
+Since this is a chocolate bar, and not something healthy, you might try using a negative number. Modify the code to use the value **-2** and see what happens!
 
 ---
 

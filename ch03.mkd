@@ -248,7 +248,7 @@ Putting all of this together, we get the following table:
 
         {
             description = "A Very Happy Block",
-            tiles = { "happy.png" },
+            tiles = { "hello_happy.png" },
             groups = { cracky = 3 },
             sounds = default.node_sound_stone_defaults(),
         }
@@ -265,7 +265,7 @@ We can now insert the full table. It's customary to add a new line after the fir
 
         minetest.register_node("hello:happy_block", {
             description = "A Very Happy Block",
-            tiles = { "happy.png" },
+            tiles = { "hello_happy.png" },
             groups = {cracky = 3},
             sounds = default.node_sound_stone_defaults(),
         })

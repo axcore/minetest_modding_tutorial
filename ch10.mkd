@@ -129,7 +129,7 @@ This line creates a variable.
 
 Now, what happens if you have several mods that create a variable called **num**? Specifically, what if one of those mods wants to read not its own **num**, but the **num** from a different mod?
 
-The way this problem is solved is with **namespaces**. Longer explanations are available, but all you need to know is how to create them and how to use them.
+The way that Minetest mods solve this problem is to use **namespaces**. Lua manuals would describe the problem in different terms, but that's not important here. Most Minetest mods use the namespace paradigm, so you need to know is how to create namespaces and how to use them.
 
 A namespace often has the same name as the mod itself. For your **hello** mod, you would create a namespace like this:
 
@@ -143,7 +143,15 @@ Now you can create variables that *contain the name of the mod*.
 
 Because the variable's name contains the name of the mod, it's easy for other mods to read the variable.
 
-        minetest.log(hello.message)
+You could also create functions that *contain the name of the mod*. Minetest has its own namespace, and that's why its functions are named like this:
+
+        minetest.register_node()
+        minetest.register_craft()
+
+...instead of like this:
+
+        register_node()
+        register_craft()
 
 ---
 

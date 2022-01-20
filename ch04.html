@@ -125,6 +125,12 @@ img { max-width: 100%; }
     },
 </code></pre>
 <hr>
+<p>Often, a craft recipe will produce more than one thing. 9 dirts might produce 9 happy blocks, for example, instead of a single happy block.</p>
+<p><img alt="Example recipe" src="img/ch04/recipe7.png"></p>
+<p>This is easy to do; just add the number 9 to the <strong>output</strong>, <em>inside the string</em>.</p>
+<pre><code>        output = "hello:happy_block 9",
+</code></pre>
+<hr>
 <p>There is a special type of craft recipe for use in furnaces. You should be familiar with placing an iron lump and some fuel into a furnace, in order to produce an iron ingot.</p>
 <p><img alt="Cooking recipe" src="img/ch04/cooking_recipe.png"></p>
 <p>If we wanted to produce happy blocks by burning dirt, we can do that with a call to the same function.</p>

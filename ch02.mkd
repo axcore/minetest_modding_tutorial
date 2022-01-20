@@ -16,15 +16,23 @@ Creating new nodes is pretty simple, so let's create one now! The steps are:
 
 Here's an image you could use.
 
-![Node image](img/ch02/happy.png)
+![Node image](img/ch02/hello_happy.png)
 
 If you're reading this in a web browser, you can probably right-click the image and select **Save image as...**, or something similar to that.
 
 Alternatively, you could borrow an image from [another mod](https://content.minetest.net/), or create your own image in a graphics application.
 
+---
+
+By convention, the name of the image file should include the name of the mod. These are good names for images.
+
+        hello_happy.png
+        hello_dirt.png
+        hello_diamond_sword.png
+
 Images are normally 16 pixels (dots) high and 16 pixels wide. Some mods might use larger images, perhaps 32x32, 64x64 or even larger, but too many large images may make the game run slowly.
 
-Inside your **hello** folder, create another folder called **textures**. All of your images will be placed inside this folder (so don't choose a different name).
+Inside your **hello** folder, create another folder called **textures**. All of your images will be placed inside this folder (so don't choose a different folder name).
 
 ---
 
@@ -52,7 +60,7 @@ Finally, open your **init.lua** file, and copy and paste this code into it. We'l
 
         minetest.register_node("hello:happy_block", {
             description = "A Very Happy Block",
-            tiles = {"happy.png"},
+            tiles = {"hello_happy.png"},
             groups = {cracky = 3},
             sounds = default.node_sound_stone_defaults(),
         })

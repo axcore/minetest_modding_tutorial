@@ -153,6 +153,16 @@ In fact, why not create a craft recipe with just a single dirt? This is actually
 
 ---
 
+Often, a craft recipe will produce more than one thing. 9 dirts might produce 9 happy blocks, for example, instead of a single happy block.
+
+![Example recipe](img/ch04/recipe7.png)
+
+This is easy to do; just add the number 9 to the **output**, *inside the string*.
+
+            output = "hello:happy_block 9",
+
+---
+
 There is a special type of craft recipe for use in furnaces. You should be familiar with placing an iron lump and some fuel into a furnace, in order to produce an iron ingot.
 
 ![Cooking recipe](img/ch04/cooking_recipe.png)

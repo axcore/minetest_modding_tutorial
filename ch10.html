@@ -103,7 +103,7 @@ img { max-width: 100%; }
 <pre><code>    num = 100
 </code></pre>
 <p>Now, what happens if you have several mods that create a variable called <strong>num</strong>? Specifically, what if one of those mods wants to read not its own <strong>num</strong>, but the <strong>num</strong> from a different mod?</p>
-<p>The way this problem is solved is with <strong>namespaces</strong>. Longer explanations are available, but all you need to know is how to create them and how to use them.</p>
+<p>The way that Minetest mods solve this problem is to use <strong>namespaces</strong>. Lua manuals would describe the problem in different terms, but that's not important here. Most Minetest mods use the namespace paradigm, so you need to know is how to create namespaces and how to use them.</p>
 <p>A namespace often has the same name as the mod itself. For your <strong>hello</strong> mod, you would create a namespace like this:</p>
 <pre><code>    hello = {}
 </code></pre>
@@ -113,7 +113,13 @@ img { max-width: 100%; }
     hello.sum = 5 * 5
 </code></pre>
 <p>Because the variable's name contains the name of the mod, it's easy for other mods to read the variable.</p>
-<pre><code>    minetest.log(hello.message)
+<p>You could also create functions that <em>contain the name of the mod</em>. Minetest has its own namespace, and that's why its functions are named like this:</p>
+<pre><code>    minetest.register_node()
+    minetest.register_craft()
+</code></pre>
+<p>...instead of like this:</p>
+<pre><code>    register_node()
+    register_craft()
 </code></pre>
 <hr>
 <p><a href="ch09.html">Previous</a> <a href="index.html">Index</a></p>

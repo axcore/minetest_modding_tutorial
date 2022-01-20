@@ -52,6 +52,8 @@ The humidity is specified as a **humidity_point**.
             humidity_point = 50,
         })
 
+By the way, for both temperature and humidity, it's possible to use values outside the range 0-100. Nearly all mods stick to the 0-100 range, though.
+
 ---
 
 The third scale is height.

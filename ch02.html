@@ -25,11 +25,17 @@ img { max-width: 100%; }
 </ol>
 <hr>
 <p>Here's an image you could use.</p>
-<p><img alt="Node image" src="img/ch02/happy.png"></p>
+<p><img alt="Node image" src="img/ch02/hello_happy.png"></p>
 <p>If you're reading this in a web browser, you can probably right-click the image and select <strong>Save image as...</strong>, or something similar to that.</p>
 <p>Alternatively, you could borrow an image from <a href="https://content.minetest.net/">another mod</a>, or create your own image in a graphics application.</p>
+<hr>
+<p>By convention, the name of the image file should include the name of the mod. These are good names for images.</p>
+<pre><code>    hello_happy.png
+    hello_dirt.png
+    hello_diamond_sword.png
+</code></pre>
 <p>Images are normally 16 pixels (dots) high and 16 pixels wide. Some mods might use larger images, perhaps 32x32, 64x64 or even larger, but too many large images may make the game run slowly.</p>
-<p>Inside your <strong>hello</strong> folder, create another folder called <strong>textures</strong>. All of your images will be placed inside this folder (so don't choose a different name).</p>
+<p>Inside your <strong>hello</strong> folder, create another folder called <strong>textures</strong>. All of your images will be placed inside this folder (so don't choose a different folder name).</p>
 <hr>
 <p>It's possible to create a different sound effect for every new node, but most of the time we'll just re-use the sound effects provided by <a href="https://content.minetest.net/packages/Minetest/minetest_game/">minetest-game</a>.</p>
 <p>minetest-game is a collection of mods. One of those mods, called <strong>default</strong>, contains lots of sound effects.</p>
@@ -46,7 +52,7 @@ img { max-width: 100%; }
 <p>Finally, open your <strong>init.lua</strong> file, and copy and paste this code into it. We'll talk about how it works in the next chapter.</p>
 <pre><code>    minetest.register_node("hello:happy_block", {
         description = "A Very Happy Block",
-        tiles = {"happy.png"},
+        tiles = {"hello_happy.png"},
         groups = {cracky = 3},
         sounds = default.node_sound_stone_defaults(),
     })
