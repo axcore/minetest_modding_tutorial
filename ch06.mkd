@@ -12,7 +12,7 @@ You can create as many new tools as you like - you might create a pickaxe which 
 
 Once again, we start with a texture. Either create your own or use this one, which is supposed to resemble some kind of wooden club.
 
-![Wooden club](img/ch06/wooden_club.png)
+![Wooden club](img/ch06/hello_wooden_club.png)
 
 The club is created with another new function. You can probably guess its name.
 
